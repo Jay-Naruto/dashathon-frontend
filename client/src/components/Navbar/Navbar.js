@@ -9,7 +9,7 @@ import {
   Typography,
   Toolbar,
 } from "@material-ui/core";
-import { ShoppingBasket } from "@material-ui/icons";
+import { ShoppingBasket,SearchOutlined } from "@material-ui/icons";
 import useStyles from "./styles";
 import { Link, useLocation } from "react-router-dom";
 export default function Navbar({ totalItems }) {
@@ -18,7 +18,9 @@ export default function Navbar({ totalItems }) {
 
   return (
     <div>
-      <AppBar position="fixed" className={classes.appBar} color="inherit">
+      <AppBar position="fixed" className={classes.appBar} color="#f79902"
+      style={{backgroundColor:'#f79902'}}
+      >
         <Toolbar>
           <Typography
             component={Link}
@@ -35,7 +37,8 @@ export default function Navbar({ totalItems }) {
             />
             ourGrocery
           </Typography>
-         
+          <input type="text" className="header__searchbox" ></input>
+        <SearchOutlined className="header__icon"></SearchOutlined>
           {location.pathname === "/" && (
             <>
               <div className={classes.button}>

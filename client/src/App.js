@@ -102,7 +102,7 @@ function App() {
           {user ? (
             <Products
             cart={cart}
-              usesr={user}
+              user={user}
               products={products}
               handleAddToCart={handleAddToCart}
               handleEmptyCart={handleEmptyCart}

@@ -11,7 +11,7 @@ import SendIcon from '@mui/icons-material/Send';
 import {IconButton} from "@mui/material";
 import { commerce } from "../lib/commerce";
 import { Link } from "react-router-dom";
-function Chatbot({handleAddToCart,products,handleRemoveCart,cart}) {
+function Chatbot({handleAddToCart,products,handleRemoveCart,cart,user}) {
   const [query,setQuery]=useState()
   const [messages, setMessages] = React.useState([]);
   // console.log(params);
@@ -38,6 +38,10 @@ function Chatbot({handleAddToCart,products,handleRemoveCart,cart}) {
       .then((res) => res.json())
       .then((data) => console.log(data));
     eventQuery("Welcome");
+    // setTimeout(()=>{
+    //   eventQuery("after_welcome");
+    // },2000)
+
     // textQuery("What can i buy?");
   }, []);
   const [show, setShow] = useState(true);
@@ -79,7 +83,7 @@ function Chatbot({handleAddToCart,products,handleRemoveCart,cart}) {
       
       
       }
-      if (response.Removeproduct)
+      else if (response.Removeproduct)
       {
         console.log(response)
         console.log(products)
@@ -89,6 +93,7 @@ function Chatbot({handleAddToCart,products,handleRemoveCart,cart}) {
       
       
       }
+  
     } 
     catch (error) {
       const conversation = {
@@ -148,50 +153,12 @@ setQuery('')
   };
 
 
-  //   const renderCards = (cards) => {
-  //     return cards.map((card, i) => <Card key={i} cardInfo={card.structValue} />);
-  //   };
 
-  //   const renderOneMessage = (message, i) => {
-  //     console.log("message", message);
-
-  //     if (message.content && message.content.text && message.content.text.text) {
-  //       return (
-  //         <Message key={i} who={message.who} text={message.content.text.text} />
-  //       );
-  //     } else if (message.content && message.content.payload.fields.card) {
-  //       const AvatarSrc =
-  //         message.who === "bot" ? <Icon type="robot" /> : <Icon type="smile" />;
-
-  //       return (
-  //         <div>
-  //           <List.Item style={{ padding: "1rem" }}>
-  //             <List.Item.Meta
-  //               avatar={<Avatar icon={AvatarSrc} />}
-  //               title={message.who}
-  //               description={renderCards(
-  //                 message.content.payload.fields.card.listValue.values
-  //               )}
-  //             />
-  //           </List.Item>
-  //         </div>
-  //       );
-  //     }
-  //   };
-
-  //   const renderMessage = (returnedMessages) => {
-  //     if (returnedMessages) {
-  //       return returnedMessages.map((message, i) => {
-  //         return renderOneMessage(message, i);
-  //       });
-  //     } else {
-  //       return null;
-  //     }
-  //   };
-  // console.log(messages);
   return (
     <>
-      {!show ? (
+    <div>
+    <div style={{position:'fixed',top:'80%',right:'1%'}}>
+    {!show ? (
         <>
           <div
             style={{
@@ -199,7 +166,8 @@ setQuery('')
               border: "none",
               position: "absolute",
               right: "5%",
-              bottom: "15%",
+              bottom: "80%",
+              float:'right'
             }}
           >
             <Card
@@ -300,8 +268,8 @@ setQuery('')
                    
                    
                     <br></br>
-                    <Typography variant="h4" component="h4" color="white">
-                      Hi Jay!
+                    <Typography variant="h5" component="h5" color="white">
+                      Hi {user.username}!
                     </Typography>
                   </div>
 
@@ -420,7 +388,12 @@ setQuery('')
           </div>
         </>
       ) : null}
-      <div style={{ position: "absolute", right: "0%", top: "80%" }}>
+      <div style={{ 
+        // position: "absolute", 
+        // right: "0%", 
+        // top: "10%"
+        float:'right'
+         }}>
         {!show ? (
           <img
             onClick={() => showBot()}
@@ -438,6 +411,10 @@ setQuery('')
           ></img>
         )}
       </div>
+    </div>
+      
+    </div>
+   
     </>
   );
 }
